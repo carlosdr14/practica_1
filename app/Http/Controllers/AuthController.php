@@ -119,13 +119,26 @@ class AuthController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'No user session found.']);
         }
 
+        $messages = [
+            'auth1.required' => 'The first authentication code is required.',
+            'auth1.numeric' => 'The first authentication code must be a number.',
+            'auth2.required' => 'The second authentication code is required.',
+            'auth2.numeric' => 'The second authentication code must be a number.',
+            'auth3.required' => 'The third authentication code is required.',
+            'auth3.numeric' => 'The third authentication code must be a number.',
+            'auth4.required' => 'The fourth authentication code is required.',
+            'auth4.numeric' => 'The fourth authentication code must be a number.',
+            'auth5.required' => 'The fifth authentication code is required.',
+            'auth5.numeric' => 'The fifth authentication code must be a number.',
+        ];
+
         $request->validate([
             'auth1' => 'required|numeric',
             'auth2' => 'required|numeric',
             'auth3' => 'required|numeric',
             'auth4' => 'required|numeric',
             'auth5' => 'required|numeric',
-        ]);
+        ], $messages);
 
         $code = implode('', [
             $request->auth1,
@@ -141,6 +154,13 @@ class AuthController extends Controller
                 'two_factor_expires_at' => null,
             ]);
 
+            // Mensaje de éxito en la verificación
+            session()->flash('success', 'Authentication code verified successfully.');
+
+            $token = bin2hex(random_bytes(32));
+            $user->update(['two_factor_token' => $token]);
+
+            // Loguear al usuario
             Auth::login($user);
 
             session()->forget('auth_user_id');
