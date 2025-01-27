@@ -1,0 +1,141 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+.one-section,
+.authentication-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f2f4f6;
+}
+
+.one-section p {
+    font-size: 2.5rem;
+    color: #212529;
+    font-weight: bold;
+}
+
+.card-primary.card-outline {
+    border-top: 3px solid #111827;
+}
+
+.login-card-body,
+.register-card-body {
+    background-color: #fff;
+    border-top: 0;
+    color: #666;
+    padding: 20px;
+    width: 380px;
+}
+
+.register-card-body {
+    width: 600px !important;
+}
+
+.login-card-body p,
+.register-card-body p {
+    font-size: .875rem;
+    color: #666;
+    margin: 0;
+    padding: 0 20px 20px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.btn-outline-login {
+    color: #111827;
+    background-color: #fff;
+    border-color: #111827;
+}
+
+.btn-outline-login:hover {
+    color: #fff;
+    background-color: #111827;
+    border-color: #111827;
+}
+
+.login-div2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.login-div2 p {
+    font-size: 1rem;
+    color: #666;
+    padding: 0;
+}
+
+.login-div2 a {
+    color: #111827;
+    margin-left: 10px;
+}
+
+.footer-login p {
+    font-size: 1rem;
+}
+
+.footer-login p span {
+    font-weight: 500 !important;
+}
+
+.authentication-section p{
+    color: #111827;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.auth-div {
+    width: 600px;
+}
+
+.auth-div2 {
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-div3{
+    margin: 50px 0;
+    width: 300px;
+}
+
+.btn-auth{
+    background-color: #111827;
+    color: #fff;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.btn-auth:hover{
+    background-color: #111827;
+    color: #fff;
+}
+
+.auth-form-control{
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    color: #666;
+    text-align: center;
+}
+
+.auth-form-control::placeholder{
+    color: #dee2e6;
+    text-align: center;
+}
