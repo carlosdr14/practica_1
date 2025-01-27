@@ -69,7 +69,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Your email has been verified. You can now log in.');
     }
 
-  
+
     public function login(Request $request)
     {
         $messages = [
