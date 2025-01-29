@@ -139,3 +139,21 @@
     color: #dee2e6;
     text-align: center;
 }
+
+.home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f2f4f6;
+}
+
+.home-section div{
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

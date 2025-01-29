@@ -11,12 +11,18 @@ class EmailVerification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * El usuario al que se envía el correo.
+     *
+     * @var \App\Models\User
+     */
     public $user;
 
     /**
-     * Create a new message instance.
+     * Crea una nueva instancia del mensaje.
      *
-     * @param $user
+     * @param \App\Models\User $user El usuario al que se envía el correo.
+     * @return void
      */
     public function __construct($user)
     {
@@ -24,18 +30,20 @@ class EmailVerification extends Mailable
     }
 
     /**
-     * Build the message.
+     * Construye el mensaje.
      *
      * @return $this
      */
     public function build()
     {
+        // Genera una URL de verificación temporalmente firmada
         $verificationUrl = URL::temporarySignedRoute(
             'verify.email',
             now()->addMinutes(60),
             ['user' => $this->user->id]
         );
 
+        // Construye el mensaje de correo electrónico
         return $this->subject('Verify Your Email Address')
             ->view('emails.verify')
             ->with(['verificationUrl' => $verificationUrl]);

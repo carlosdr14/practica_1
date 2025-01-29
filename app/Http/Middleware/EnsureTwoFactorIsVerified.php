@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class EnsureTwoFactorIsVerified
 {
+    /**
+     * Maneja una solicitud entrante.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
     public function handle(Request $request, Closure $next)
     {
         // Verificar si el usuario tiene una sesión de doble factor activa

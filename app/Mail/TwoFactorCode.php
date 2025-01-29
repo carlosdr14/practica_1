@@ -11,17 +11,38 @@ class TwoFactorCode extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * El código de autenticación de dos factores.
+     *
+     * @var int
+     */
     public $code;
+
+    /**
+     * El usuario al que se envía el correo.
+     *
+     * @var \App\Models\User
+     */
     public $user;
 
-    // Constructor
+    /**
+     * Crea una nueva instancia del mensaje.
+     *
+     * @param int $code El código de autenticación de dos factores.
+     * @param \App\Models\User $user El usuario al que se envía el correo.
+     * @return void
+     */
     public function __construct($code, User $user)
     {
         $this->code = $code;
         $this->user = $user;
     }
 
-    // Construcción del correo
+    /**
+     * Construye el mensaje.
+     *
+     * @return $this
+     */
     public function build()
     {
         return $this->subject('Your Two Factor Authentication Code')

@@ -56,6 +56,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="g-recaptcha mb-3" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
+
                 <button type="submit" id="btn-register" class="btn btn-outline-login btn-block fw-bold w-100">
                     <i class="fa-solid fa-circle-arrow-right"></i> REGISTER
                 </button>
@@ -64,6 +67,7 @@
                     <a href="{{ route('login') }}" class="login-register">Login</a>
                 </div>
             </form>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         </div>
     </div>
     <div class="footer-login mt-5">

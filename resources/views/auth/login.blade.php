@@ -38,6 +38,8 @@
                         Password is required.
                     </div>
                 </div>
+                <div class="g-recaptcha mb-3" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-outline-login btn-block fw-bold text-center w-100" id="btnLogin">
@@ -50,6 +52,7 @@
                     <a href="{{ route('register') }}" class="login-register">Register</a>
                 </div>
             </form>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         </div>
     </div>
     <div class="footer-login mt-5">
@@ -86,7 +89,7 @@
 
             setTimeout(() => {
                 submitButton.disabled = false;
-                submitButton.innerHTML = '<i class="fa-solid fa-circle-arrow-right"></i> REGISTER';
+                submitButton.innerHTML = '<i class="fa-solid fa-circle-arrow-right"></i> LOGIN';
             }, 5000);
         });
     });
