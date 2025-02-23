@@ -21,6 +21,13 @@
                 });
             </script>
             @endif
+            @if(session('error'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    notyf.error("{{ session('error') }}");
+                });
+            </script>
+            @endif
             <p>Enter your login information</p>
             <form id="loginForm" action="{{ route('login') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
@@ -38,7 +45,7 @@
                         Password is required.
                     </div>
                 </div>
-                <div class="g-recaptcha mb-3" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                <div class="g-recaptcha mb-3" data-sitekey="{{ config('services.recaptcha.site_key') }}"  ></div>
                 <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
                 <div class="row">
                     <div class="col-md-12">
@@ -52,11 +59,11 @@
                     <a href="{{ route('register') }}" class="login-register">Register</a>
                 </div>
             </form>
-            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+           
         </div>
     </div>
     <div class="footer-login mt-5">
-        <p>Practica 1 | <span>{{ date('Y') }}</span></p>
+        <p>SERVIDOR 1 | <span>{{ date('Y') }}</span></p>
     </div>
 </section>
 

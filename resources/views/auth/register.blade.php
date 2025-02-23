@@ -22,6 +22,13 @@
                 });
             </script>
             @endif
+            @if(session('error'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    notyf.error("{{ session('error') }}");
+                });
+            </script>
+            @endif
             <p>Fill in the details to create an account</p>
             <form id="registerForm" action="{{ route('register.action') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
@@ -35,22 +42,33 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                                <span class="input-group-text" id="span-email"><i class="fa-solid fa-envelope"></i></span>
-                                <div class="invalid-feedback">
-                                    Please provide a valid email address.
-                                </div>
+                    <div class="col-md-12">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                            <span class="input-group-text" id="span-email"><i class="fa-solid fa-envelope"></i></span>
+                            <div class="invalid-feedback">
+                                Please provide a valid email address.
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="8" maxlength="16" pattern="(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,16}">
                                 <span class="input-group-text" id="span-password"><i class="fa-solid fa-key"></i></span>
                                 <div class="invalid-feedback">
                                     Password must be between 8 and 16 characters and include at least one uppercase letter, one number, and one special character.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required minlength="8" maxlength="16" pattern="(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,16}">
+                                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                <div class="invalid-feedback">
+                                    Please confirm your password.
                                 </div>
                             </div>
                         </div>
@@ -67,7 +85,6 @@
                     <a href="{{ route('login') }}" class="login-register">Login</a>
                 </div>
             </form>
-            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         </div>
     </div>
     <div class="footer-login mt-5">

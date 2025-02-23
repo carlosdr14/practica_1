@@ -20,6 +20,13 @@
             });
         </script>
         @endif
+        @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                notyf.error("{{ session('error') }}");
+            });
+        </script>
+        @endif
         <form action="{{ route('verify.action') }}" method="POST" id="authForm">
             @csrf
             <div class="row">

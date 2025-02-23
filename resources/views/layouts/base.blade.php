@@ -11,6 +11,7 @@
 <body>
     <!-- marcador para llenar el contenido de las vistas -->
     @yield('content')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

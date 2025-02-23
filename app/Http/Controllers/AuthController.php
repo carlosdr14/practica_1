@@ -46,13 +46,14 @@ class AuthController extends Controller
             'password.max' => 'Password must be at most 16 characters.',
             'password.string' => 'Password must be a string.',
             'password.regex' => 'Password must be between 8 and 16 characters and include at least one uppercase letter, one number, and one special character.',
+            'password.confirmed' => 'The password confirmation does not match.',
         ];
 
         // Validar la solicitud
         $request->validate([
             'name' => 'required|string|max:30|min:6|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|max:16|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
+            'password' => 'required|string|min:8|max:16|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/|confirmed',
         ], $messages);
 
         // Crear el usuario

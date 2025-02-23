@@ -4,31 +4,31 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Mailer\Exception\TransportException as MailTransportException;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of exception types with their corresponding custom log levels.
+     * Niveles de registro personalizados para las excepciones.
      *
-     * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
+     * @var array
      */
-    protected $levels = [
-        //
-    ];
+    protected $levels = [];
 
     /**
-     * A list of the exception types that are not reported.
+     * Una lista de las excepciones que no deben ser reportadas.
      *
-     * @var array<int, class-string<\Throwable>>
+     * @var array
      */
-    protected $dontReport = [
-        //
-    ];
+    protected $dontReport = [];
 
     /**
-     * A list of the inputs that are never flashed to the session on validation exceptions.
+     * Una lista de los atributos de entrada que nunca deben ser incluidos en la sesión flash.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $dontFlash = [
         'current_password',
@@ -37,14 +37,47 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Register the exception handling callbacks for the application.
+     * Registra los manejadores de excepciones para la aplicación.
      *
      * @return void
      */
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            // Aquí puedes registrar cualquier lógica de reporte personalizada
         });
+    }
+
+    /**
+     * Renderiza una excepción en una respuesta HTTP.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Throwable $exception)
+    {
+        // Manejo de errores de base de datos
+        if ($exception instanceof QueryException) {
+            return back()->with('error', 'Error de base de datos');
+        }
+
+        // Manejo de errores de validación
+        if ($exception instanceof ValidationException) {
+            return back()->with('error', 'Error de validación');
+        }
+
+        // Manejo de errores HTTP
+        if ($exception instanceof HttpException) {
+            return back()->with('error', 'Error de ruta');
+        }
+
+        // Manejo de errores de envío de correo
+        if ($exception instanceof MailTransportException) {
+            return back()->with('error', 'Error al enviar el correo');
+        }
+
+        // Renderiza la excepción usando el método padre
+        return parent::render($request, $exception);
     }
 }
