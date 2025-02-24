@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use App\Helpers\SlackHelper;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -49,6 +50,7 @@ class AuthController extends Controller
             'password.confirmed' => 'The password confirmation does not match.',
         ];
 
+        Log::info('Registering new user');
         // Validar la solicitud
         $request->validate([
             'name' => 'required|string|max:30|min:6|unique:users',
@@ -56,12 +58,16 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|max:16|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/|confirmed',
         ], $messages);
 
+        Log::info('Creating new user');
+
         // Crear el usuario
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        
+        Log::info('User created');
 
         // Enviar correo de verificación
         Mail::to($user->email)->send(new EmailVerification($user));
