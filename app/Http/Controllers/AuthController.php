@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         Log::info('Registering new user');
 
-        dd($request);
+        // dd($request);
         // Validar la solicitud
         $request->validate([
             'name' => 'required|string|max:30|min:6|unique:users',
