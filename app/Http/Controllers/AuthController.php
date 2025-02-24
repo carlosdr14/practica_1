@@ -51,6 +51,8 @@ class AuthController extends Controller
         ];
 
         Log::info('Registering new user');
+
+        dd($request);
         // Validar la solicitud
         $request->validate([
             'name' => 'required|string|max:30|min:6|unique:users',
@@ -58,7 +60,10 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|max:16|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/|confirmed',
         ], $messages);
 
-        Log::info('Creating new user');
+        // if ($validar->fails()) {
+        //     Log::info('Creating new user');
+        // }
+    
 
         // Crear el usuario
         $user = User::create([
@@ -66,7 +71,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        
+
         Log::info('User created');
 
         // Enviar correo de verificación
