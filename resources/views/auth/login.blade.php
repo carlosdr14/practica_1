@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="footer-login mt-5">
-        <p>SERVIDOR 1 | <span>{{ date('Y') }}</span></p>
+        <p>SERVIDOR 2 | <span>{{ date('Y') }}</span></p>
     </div>
 </section>
 
